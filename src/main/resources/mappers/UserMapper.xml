@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccb.mapper.UserMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO tb_user (
+        user_name,
+        password,
+        name,
+        age,
+        sex,
+        birthday,
+        note,
+        created,
+        updated
+    )
+      VALUES
+	(
+		#{userName},
+		#{password},
+		#{name},
+		#{age},
+		#{sex},
+		#{birthday},
+		#{note},
+		now(),
+		now()
+	);
+    </insert>
+
+    <delete id="deleteUserById">
+        delete from tb_user where id = #{id};
+    </delete>
+
+    <update id="updateUserById">
+        UPDATE tb_user
+        SET
+         user_name = #{userName},
+         password = #{password},
+         name = #{name},
+         age = #{age},
+         sex = #{sex},
+         birthday = #{birthday},
+         note = #{note},
+         updated = now()
+        WHERE
+            (id = #{id});
+    </update>
+
+    <select id="selectUserById" resultType="User">
+        select
+        id,
+        user_name,
+        password,
+        name,
+        age,
+        sex,
+        birthday,
+        note,
+        created,
+        updated
+        from
+        USER where id = #{id};
+    </select>
+
+</mapper>
